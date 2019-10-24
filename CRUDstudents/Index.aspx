@@ -36,6 +36,7 @@
                     favorite.push(this.id);
                 });
             alert("My favourite sports are: " + favorite.join(", "));
+            CRUDstudents.StudentsWebService.DelStudents(favorite);
         });
     });
 </script>
