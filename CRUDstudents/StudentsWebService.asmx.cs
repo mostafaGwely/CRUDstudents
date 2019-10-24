@@ -38,9 +38,9 @@ namespace CRUDstudents
                 cmd.CommandType = CommandType.Text;
                 con.Open();
                 var reader = cmd.ExecuteReader();
-                var student = new Student();
                 while (reader.Read())
                 {
+                    var student = new Student();
                     student.Id = Convert.ToInt32(reader["ID"]);
                     student.Name = reader["Name"].ToString();
                     student.Gender= reader["Gender"].ToString();
