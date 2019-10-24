@@ -12,22 +12,15 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <asp:ScriptManager ID="ScriptManager1"  runat="server"></asp:ScriptManager>
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <div>
+
             <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
-
-
-            <br />
-            <asp:UpdatePanel ID="updatepanel1" runat="server">
-                <ContentTemplate>
-                    <div>
-                        <asp:Button ID="btnPost" runat="server" Text="Add" />
-                        <asp:Button ID="btnRemove" runat="server" Text="Remove" />
-                        <asp:Button ID="btnUpdate" runat="server" Text="Update" />
-                    </div>
-                </ContentTemplate>
-            </asp:UpdatePanel>
-
+            <div>
+                <asp:Button ID="btnPost" runat="server" Text="Add" />
+                <asp:Button ID="btnRemove" runat="server" Text="Remove" />
+                <asp:Button ID="btnUpdate" runat="server" Text="Update" />
+            </div>
 
         </div>
     </form>
