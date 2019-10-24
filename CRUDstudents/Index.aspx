@@ -5,6 +5,8 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Students</title>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <script src="Scripts/bootstrap.js"></script>
 </head>
 <body>
     <form id="form1" runat="server">
