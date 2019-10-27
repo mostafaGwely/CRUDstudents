@@ -13,6 +13,7 @@ namespace CRUDstudents
         protected void Page_Load(object sender, EventArgs e)
         {
                 Label1.Text = getTable(new string[] { "Id", "Name", "Gender", "TotalMarks" });
+
         }
 
         private string getTable(string[] Columns)
@@ -20,19 +21,19 @@ namespace CRUDstudents
             var header = "";
             foreach (var columnName in Columns)
             {
-                header += string.Format("<th scope='col'>{0}</th>", columnName);
+                header += string.Format(@"<th scope='col'>{0}</th>", columnName);
             }
 
             var rows = "";
             foreach (var student in Client.GetStudents())
             {
-                rows += "<tr>";
-                rows += string.Format("<th scope='row'>{0}</th>", student.Id);
-                rows += string.Format("<td>{0}</td>", student.Name);
-                rows += string.Format("<td>{0}</td>", student.Gender);
-                rows += string.Format("<td>{0}</td>", student.TotalMarks);
+                rows += @"<tr>";
+                rows += string.Format(@"<th scope='row'>{0}</th>", student.Id);
+                rows += string.Format(@"<td>{0}</td>", student.Name);
+                rows += string.Format(@"<td>{0}</td>", student.Gender);
+                rows += string.Format(@"<td>{0}</td>", student.TotalMarks);
 
-                rows += string.Format("<td>{0}</td>",
+                rows += string.Format(@"<td>{0}</td>",
                    string.Format(@"<div class=""form-check""  >
                                         <input type=""checkbox"" class=""form-check-input checkbox"" id=""checkboxForId{0}"" name=""checkBox"">
                                           <label class=""form-check-label"" for=""checkboxForId{0}"" >Edit</label>
@@ -43,7 +44,7 @@ namespace CRUDstudents
                 //    @"<asp:CheckBox ID=""{0}"" runat=""server"" OnCheckedChanged=""CheckBox1_CheckedChanged"" />",
                 //    student.Id);
 
-                rows += "</tr>";
+                rows += @"</tr>";
             }
 
 

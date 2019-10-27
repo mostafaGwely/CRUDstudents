@@ -7,10 +7,11 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Students</title>
-
-    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <link href="Content/bootstrap.css" rel="stylesheet" />
     <link href="Content/DataTables/css/jquery.dataTables.css" rel="stylesheet" />
+
+
+    <script src="Scripts/jquery-3.0.0.js"></script>
     <script src="Scripts/DataTables/jquery.dataTables.js"></script>
 
 
@@ -18,7 +19,7 @@
 
         $(document).ready(function () {
 
-            //$("#studentsTable").DataTable();
+            $("#studentsTable").DataTable();
 
             $("body").on("click", "#btnGet", function () {
                 $.ajax({
@@ -174,13 +175,14 @@
         </asp:ScriptManager>
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
-                <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+                <asp:Label ID="Label1" runat="server" CssClass="border" Text=""></asp:Label>
+
 
                 <div>
 
                     <br />
 
-                    <div>
+                    <div id="controls" class="border">
                         <div id="form">
 
                             <table>
@@ -189,7 +191,7 @@
                                         <asp:Label ID="lblName" runat="server" Text="Name"></asp:Label>
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="txbName" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txbName" CssClass="form-control" runat="server"></asp:TextBox>
                                     </td>
                                 </tr>
 
@@ -198,7 +200,7 @@
                                         <asp:Label ID="lblGender" runat="server" Text="Gender"></asp:Label>
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="txbGender" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txbGender" CssClass="form-control" runat="server"></asp:TextBox>
                                     </td>
                                 </tr>
 
@@ -207,7 +209,7 @@
                                         <asp:Label ID="lblTotalMarks" runat="server" Text="TotalMarks"></asp:Label>
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="txbTotalMarks" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txbTotalMarks" CssClass="form-control" runat="server"></asp:TextBox>
                                     </td>
                                 </tr>
                             </table>
@@ -216,11 +218,11 @@
 
                         </div>
 
-                        <div id="controls">
-                            <input type="submit" runat="server" value="Get" id="btnGet" />
-                            <input type="submit" runat="server" value="Delete" id="btnDelete" />
-                            <input type="submit" runat="server" value="Add" id="btnAdd" />
-                            <input type="submit" runat="server" value="Update" id="btnUpdate" />
+                        <div>
+                            <input type="submit" runat="server" value="Get" id="btnGet" class="btn btn-dark" />
+                            <input type="submit" runat="server" value="Delete" id="btnDelete" class="btn btn-dark" />
+                            <input type="submit" runat="server" value="Add" id="btnAdd"  class="btn btn-dark" />
+                            <input type="submit" runat="server" value="Update" id="btnUpdate"  class="btn btn-dark" />
 
                         </div>
 

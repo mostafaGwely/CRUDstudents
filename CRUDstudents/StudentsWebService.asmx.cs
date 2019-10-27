@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Net.Configuration;
 using System.Web;
@@ -138,5 +139,35 @@ namespace CRUDstudents
             }
             return student;
         }
+
+        [WebMethod]
+        public void propagateStudents()
+        {
+            var rnd = new Random();
+
+            for (int i = 0; i < 10; i++)
+            {
+                AddStudent(new Student
+                {
+                    Name = ((Path.GetRandomFileName()).Replace(".", "")).Substring(0, 8),
+                    Gender = (new string[] { "Male", "Female" })[rnd.Next(0,2)],
+                    TotalMarks = rnd.Next(0,1000)
+                });
+            }
+        }
+
+        [WebMethod]
+        public void purgeStudents()
+        {
+            string cs = conString;
+            using (var con = new SqlConnection(cs))
+            {
+                var cmd = new SqlCommand("delete tblStudents", con);
+                cmd.CommandType = CommandType.Text;
+                con.Open();
+                var reader = cmd.ExecuteReader();
+            }
+        }
+
     }
 }
