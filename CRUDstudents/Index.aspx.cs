@@ -12,7 +12,6 @@ namespace CRUDstudents
         public StudentsWebService Client = new StudentsWebService();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
                 Label1.Text = getTable(new string[] { "Id", "Name", "Gender", "TotalMarks" });
         }
 
@@ -35,7 +34,7 @@ namespace CRUDstudents
 
                 rows += string.Format("<td>{0}</td>",
                    string.Format(@"<div class=""form-check""  >
-                                        <input type=""checkbox"" class=""form-check-input"" id=""checkboxForId{0}"" name=""checkBox"">
+                                        <input type=""checkbox"" class=""form-check-input checkbox"" id=""checkboxForId{0}"" name=""checkBox"">
                                           <label class=""form-check-label"" for=""checkboxForId{0}"" >Edit</label>
                                     </div>", student.Id));
 
@@ -55,8 +54,11 @@ namespace CRUDstudents
             old = old.Replace("{$rows}", rows);
 
             return old;
-
         }
 
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("test.aspx");
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace CRUDstudents
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line.
-    // [System.Web.Script.Services.ScriptService]
+    [System.Web.Script.Services.ScriptService]
     public class StudentsWebService : System.Web.Services.WebService
     {
         public string conString =
@@ -55,18 +55,16 @@ namespace CRUDstudents
         }
 
         [WebMethod]
-        public List<Student> DelStudents(string Ids)
+        public void DelStudents(string Ids)
         {
             var idList = Ids.Split(',').Select(Int32.Parse).ToList();
 
-
-            var Students = new List<Student>();
             using (var con = new SqlConnection(conString))
             {
                 var cmd = new SqlCommand();
-                var sql = "SELECT * FROM tblStudents WHERE ID IN ({0})";
+                var sql = "DELETE FROM tblStudents WHERE ID IN ({0})";
+                cmd.CommandText = sql;
 
-                //var idList = new int[] { 2,3,4};
                 var idParameterList = new List<string>();
                 var index = 0;
                 foreach (var id in idList)
@@ -81,22 +79,64 @@ namespace CRUDstudents
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.Text;
                 con.Open();
+                cmd.ExecuteReader();
+            }
+
+        }
+
+        [WebMethod]
+        public void AddStudent(Student student)
+        {
+            using (var con = new SqlConnection(conString))
+            {
+                var cmd = new SqlCommand();
+                cmd.CommandText = string.Format("insert into tblStudents values('{0}', '{1}', '{2}')", student.Name, student.Gender, student.TotalMarks);
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.Text;
+
+                con.Open();
+                cmd.ExecuteReader();
+            }
+        }
+
+        [WebMethod]
+        public void UpdateStudent(Student student, string ID)
+        {
+            using (var con = new SqlConnection(conString))
+            {
+                var cmd = new SqlCommand();
+                cmd.CommandText = string.Format("UPDATE tblStudents SET Name = '{0}', Gender= '{1}', TotalMarks= {2} WHERE ID = {3}",
+                    student.Name, student.Gender, student.TotalMarks, Convert.ToInt32(ID));
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.Text;
+
+                con.Open();
+                cmd.ExecuteReader();
+            }
+        }
+
+
+        [WebMethod]
+        public Student GetStudentById(string Id)
+        {
+            string cs = conString;
+            var student = new Student();
+            using (var con = new SqlConnection(cs))
+            {
+                var cmd = new SqlCommand(string.Format("select * from tblStudents where ID = {0}", Id), con);
+                cmd.CommandType = CommandType.Text;
+                con.Open();
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    var student = new Student();
                     student.Id = Convert.ToInt32(reader["ID"]);
                     student.Name = reader["Name"].ToString();
                     student.Gender = reader["Gender"].ToString();
                     student.TotalMarks = Convert.ToInt32(reader["TotalMarks"]);
-
-                    Students.Add(student);
                 }
 
             }
-            return Students;
-
+            return student;
         }
-
     }
 }

@@ -1,4 +1,4 @@
-﻿<table class='table table-hover table-dark'>
+﻿<table class="table" id="studentsTable">
   <thead>
 	<tr>
 		{$header}
@@ -11,3 +11,4 @@
 
   </tbody>
 </table>
+
